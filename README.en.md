@@ -43,7 +43,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 - [React](https://reactjs.org)
 - [React Native](https://facebook.github.io/react-native/)
 - [Expo](https://expo.io/)
-- [Docker](https://www.docker.com/) - Nova Feature
+- [Docker](https://www.docker.com/) - New Feature
 
 ## 💻 Projeto
 
@@ -74,25 +74,25 @@ Feito com ♥ by Rocketseat :wave: [Entre na nossa comunidade!](https://discorda
 
 ---
 
-# NodeJS, React and React Native rodando com Docker e Docker Compose. 
+# NodeJS, React and React Native running on Docker and Docker Compose. 
 ## Nova Contribuição by [Lexlima](https://github.com/lexvieira)
 ---
 
-### Uma breve explicação sobre o que um Docker. 
-Read this in other languages: [English](README.en.md), [Portuguese](README.md).
+### A little explanation about Docker)
+Read this in other languages: [English], 한국어, 日本語, 简体中文, 正體中文.
 
-Imagine que você trabalhe ou apenas esteja estudando varias technologias diferentes, Meu caso, culpado!!! :) ou o de varios de nós que utilizam `NodeJS`, `React`, `C#`, `Ruby`, `PHP` ou mesmo `Haskell` (Estava testando poucos dias atrás \o/) ou por examplo você só queira rodar alguns comandos em linux no seu Note ou PC sem ter que instalar um [Virutal Box](https://www.virtualbox.org/) ou [VMWare](https://www.vmware.com/).Essas linguagens e suas IDEs *(integrated development environment)*  consomem recursos como HD, Memória, Processador e principalmente **tempo**. *
+Imagine that you work or are just learning many different technologies, My case, Guilty!!! or the situation of many of us that use  `NodeJS`, `React`, `C#`, `Ruby`, `PHP` ou mesmo `Haskell` (I was using few days ago \o/ or for instance you just want to run some linux commands in your laptop or PC without need to install a  [Virutal Box](https://www.virtualbox.org/) ou [VMWare](https://www.vmware.com/)) Those languages and their IDEs (integrated development environment) consume resources like HD, Memory, Processor and mainly **time***
 
-Portanto, temos o Docker para ter acesso a uma infinidade de imagens de diferentes plataformas, que podem ser instanciadas quando necessário e podem ser descartadas quando não mais necessárias. Para isso, a aplicação fica na sua máquina e é acessada através do container instanciado. 
+Therefore, we have Docker to have access to an infinite of images of different platforms, that can be instantiated when necessary and can be discarded when no longer needed. For this, the application is on your machine and is accessed through the instantiated container.
 
-Agora, mãos na massa.
+Agora, mãos na massa. Now, hands on.
 
-1. Criar DockerFile.
-2. Criar docker-compose.yml.
+1. Create DockerFile.
+2. Create docker-compose.yml
 
 ## [DockerFile](https://docs.docker.com/engine/reference/builder/) 
 
-Para rodar o projeto será necessário executar o yarn install para cada um dos projectos, **backend, web e mobile**, abaixo estão os comandos básicos para trabalhar com Docker nesse projeto React. Nesse caso poderemos rodar os commandos diretamente dentro do container.
+To run the project will be needed execute the **yarn install** for each one of the projects, **backend, web e mobile**, below are the commands to work with Docker on that React project. In this case, we will run the commands directly from the container.
 
 ### DockerFile
 ```
@@ -113,14 +113,14 @@ Para rodar o projeto será necessário executar o yarn install para cada um dos 
   CMD ["node", "-v"]
 ```
 
-Você pode dar um build da imagem usando o commando:
+You can build the Docker image with the command:  
 ```
 docker build -t omnistack10:v01 .
 ```
 
-* **Rodar comandos dentro de cada projeto utilizando o \bin\bash**
-> Você pode utilizar a mesma imagem para os 3 projetos, simplesmente mudando o -volume (-v) diretórios.
-
+* **Execute commands inside of the container docker \bin\bash**.
+> You can use the same builded image, basic change the -volumes directories.
+ 
 1. Backend 
 ``` 
 docker run -ti -v $(pwd)/backend:/opt/ui omnistack10:v01 /bin/bash
@@ -136,7 +136,7 @@ docker run -ti -v $(pwd)/web:/opt/ui omnistack10:v01 /bin/bash
 docker run -ti -v $(pwd)/mobile:/opt/ui omnistack10:v01 /bin/bash
 ```  
 
-* Dentro do container você pode rodar os commandos para atualização do projeto ou adicionar novas bibliotecas ao seu projeto normalmente.
+* Inside the container, you can run all the commands normally, as update a project or add a new library.
 
 Example:
 ```
@@ -149,7 +149,7 @@ yarn install v1.21.1
 Done in 4.45s.
 ``` 
 
-Depois de atualizar os projetos rodando os comandos dentro do container, você pode colocar os serviços **backend, web, mobile** para rodar.
+After update the projects as you were updating in your own machine (actually it is, but using docker, save resources and just use when you need it), you can run the dockers for each app **backend, web, mobile***.
 
 1. Rodar servidor NodeJS *(Run Server NodeJs)*
 ```
@@ -160,10 +160,10 @@ docker run -ti -v $(pwd)/backend:/opt/ui -p 81:3333 omnistack10:v01 yarn dev
 docker run -ti -v $(pwd)/web:/opt/ui -p 80:3000 omnistack10:v01 yarn start
 ```
 
-3. Rodar Serviço React Native Expo.
-   > Usando o Docker Expo Developer Tools para emular o mobile app Android ou IOS, no caso do React Native. Este docker não será utilizado em produção.
-  - Para podermos rodar a aplicação no celular e usar o *Expo Developer Tools* em nosso navegador temos que adicionar algumas configurações extras que poderiam estar em nosso *DockerFile*, porem teriamos maiores problemas para altera-lo tendo que fazer o rebuild toda vez que trocassemos de IP por exemplo.
-  - Para lidar com isso, podemos usar o .env arquivo e adicionar as variáveis que precisamos acessar dentro do container.
+3. Run React Native Service Expo.
+   > Once Docker Expo Developer Tools is to emulate the mobile app on Android or IOS, in the case of React Native. It will not be used in production).
+  - To run the app on our smartphone or emulator and use the *Expo Developer Tools* in our browser we need to add some extra configurations que could be in our *DockerFile*, however it would be necessary to rebuild the Docker image everytime that we changed the Computer IP for instance.
+  - To handle with this we can use the .env file to add the variables that we need to access inside of the container.
 
 **.env File**
 ``` 
@@ -179,7 +179,7 @@ docker run -ti -p 19000:19000 -p 19001:19001 -p 19002:19002 -p 19006:19006 -v $(
 
 ## [docker-compose.yml](https://docs.docker.com/compose/)
 
-OK, agora com os 3 docker containers rodando e funcionando temos que simplicar as coisas para não ter que ficar rodando varios comandos para subir as 3 instâncias, logo temos o **docker-compose.yml**. Um unico arquivo com a nossa estrutura inteira rodando.
+OK, now with 3 containers running we need to simplify the things for don't need to keep typing many commands. Therefore, we have **docker-compose.yml**. Only one file and our entire structure running.
 
 ### Our docker-compose.yml
 
@@ -222,9 +222,9 @@ OK, agora com os 3 docker containers rodando e funcionando temos que simplicar a
       command: yarn start
 ```
 
-Nesse caso utilizamos o mesmo **Dockerfile** para as 3 instâncias, uma vez que estamos utilizando **nodeJS** como nossa imagem padrão que já vem com *npm* e *yarn* por padrão é tranquilo utilizar somente um Dockerfile ou imagem local|dockerhub.
+In this case we used the same **Dockerfile** for the 3 instances, once that we are using **NodeJS** as our default image that already come with *npm* and *yarn* by default is simple use only one Dockerfile or image local|dockerhub.
 
-Examplo docker-compose.yml usando uma imagem local.
+Example docker-compose.yml using a localimage.
 ```
 version: "3.5"
 services: 
@@ -246,7 +246,7 @@ services:
     command: yarn start
 ```
 
-### Building e rodando o docker-compose
+### Building and Running the docker-compose
 
 ```
 docker-compose up --build -d
@@ -271,15 +271,15 @@ Successfully tagged semana-omnistack-10_expo:latest
 >--build - Build images before starting containers.
 > -d, --detach - Detached mode: Run containers in the background,
 
-depois somente. 
+after just. 
 
 ```
 docker-compose up
 ```
 
-Finalmente.
+Finally.
 
-Com certeza, depois de criar as imagens utilizando o **docker-compose --build** você precisará rodar novos commandos, adicionar novos pacotes em sua aplicação, então você pode rodar os commandos dentro do docker acessando o *bash* com o *docker run*, mas agora com os novos nomes.
+Sure, after create the images using **docker-compose --build** you will need to run new commands, add new packages in your application, so you can run the commands inside of docker accessing the **bash** using the **docker run**, but now with the new images names. 
 
 ```
 docker run -ti -v $(pwd)/backend:/opt/ui semana-omnistack-10_backend:latest /bin/bash
@@ -298,25 +298,25 @@ controllers  index.js  models  routes.js  utils  websocket.js
 
 ## Alias *(Bonus)*
 
-Antes você estava rodando os comandos diretamente dentro do container, acessando o mesmo através do **docker run**.
+Before you were running the commands inside the container, using the **docker run**.
 
-Agora você ira usar o **alias** para rodar commandos dentro do container sem necessariamente acessa-lo.
+Now you will see how to run the commands outside the container using the **alias**.
 
-Alias ou (apelidos) no Linux ou Windows(próximo update) é um jeito mais facil de você simplificar seus comandos criando atalhos para eles.
+Alias on Linux or Windows (next update) are an easier way of you run commands creating shortcuts to them.
 
-Você pode criar um alias apenas usando o terminal, porém é recomendado utilizar no linux seu arquivo **.bashrc | .zshrc** dentro da pasta **home do usuário**, dependendo do seu **Unix shell**.
+You can create an alias just using the terminal, although is recommended on Linux use your file **.bashrc | .zshrc** inside of the **home user folder**, depends on your **Unix shell**.
 
-Nesse caso vamos criar um **Alias** para o nosso **backend**, rodando os comandos dentro da pasta root da nossa aplicação (Importante) **(semana-omnistack-10)**.
+In this case we will create an **Alias** for our **backend**. running the commands inside the app root folder (Important) **(semana-omnistack-10)**.
 
-Nosso alias aqui será  `d_be` (docker backend)
+Our alias here will be  `d_be` (docker backend)
 
 ```
 ➜  semana-omnistack-10 git:(run_on_docker) ✗ alias d_be='docker run --rm -v $(pwd)/backend:/opt/ui semana-omnistack-10_backend:latest '
 ``` 
 
-Agora rodamos comandos dentro do nosso **backend container** usando apenas o alias **d_be** *(docker backend)* para executar os comandos, sem necessariamente ter que acessar nosso container usando o **bash linux** diretamente.
+Now we run commands inside our **backend container** using only the alias **d_be** *(docker backend)* to execute the commands, without necessarily need to access our container using the **bash linux** directly.
 
-Por exemplo, rodando o commando `yarn install`.
+For instance, running the command `yarn install`.
 
 ```
 ➜  semana-omnistack-10 git:(run_on_docker) ✗ d_be yarn install
@@ -326,11 +326,11 @@ success Already up-to-date.
 Done in 0.18s.
 ```
 
-Ou **yarn add socket.io-client**
+Or **yarn add socket.io-client**
 
 `d_be yarn add socket.io-client `
 
-Resultado
+Result
 
 ```
 ➜  semana-omnistack-10 git:(run_on_docker) ✗ d_be yarn add socket.io-client 
@@ -352,7 +352,7 @@ Done in 11.52s.
 ➜  semana-omnistack-10 git:(run_on_docker) ✗ 
 ```
 
-Você também pode criar alias para outros commandos, como escutar portas no Linux por exemplo.
+You also can create alias to other commands like listen linux ports.
 
 ```
 alias ListenPorts='sudo lsof -i -P -n | grep LISTEN'
@@ -360,9 +360,9 @@ alias ListenPorts='sudo lsof -i -P -n | grep LISTEN'
 [ListenPorts](imgs/listenports.png)
 <img alt="Listen Ports Linux" src="imgs/listenports.png">
 
-# CREDITOS
+# CREDITS
 
-Como normalmente, na primeira vez temos uma serie de problemas para configurar um ambiente, e com Docker não foi diferente, então aqui vai os creditos para os camaradas que ajudaram um pouco com esse pequeno projeto com Docker. 
+As normally at the first time we got a lot of problems to setup a environment, and with Docker it was not differente \o/, so here are the credits from the websites that help to finish this small project with Dockers.
 
 ### Rocketseat
 
